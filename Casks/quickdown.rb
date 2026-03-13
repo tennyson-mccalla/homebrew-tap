@@ -1,6 +1,6 @@
 cask "quickdown" do
   version "0.5.0"
-  sha256 "46439e22a072a65bdfc7bdd281c6acfbffc4164c6f93ee069d420f3fc58196dd"
+  sha256 "5ef65422f41546d97039015b79fc54f2f4a97f3852622969797bcb9de37b0100"
 
   url "https://github.com/tennyson-mccalla/QuickDown/releases/download/v#{version}/QuickDown.dmg"
   name "QuickDown"
