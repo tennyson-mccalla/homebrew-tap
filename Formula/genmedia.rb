@@ -11,7 +11,10 @@ class Genmedia < Formula
 
   def install
     venv = virtualenv_create(libexec, "python3.13")
-    venv.pip_install_and_link buildpath
+    # Install dependencies first, then the package
+    system libexec/"bin/pip", "install", *std_pip_args(build_isolation: true), "google-genai>=1.0.0", "click>=8.0"
+    system libexec/"bin/pip", "install", *std_pip_args(build_isolation: true), buildpath
+    (bin/"genmedia").write_env_script libexec/"bin/genmedia", PATH: "#{libexec}/bin:${PATH}"
   end
 
   test do
