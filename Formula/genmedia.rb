@@ -10,17 +10,16 @@ class Genmedia < Formula
   depends_on "python@3.13"
 
   def install
-    virtualenv_install_with_resources
+    venv = virtualenv_create(libexec, "python3.13")
+    venv.pip_install_and_link buildpath
   end
 
   test do
     assert_match "genmedia", shell_output("#{bin}/genmedia --version")
 
-    # Dry run doesn't need API key
     output = shell_output("GEMINI_API_KEY=test #{bin}/genmedia image 'test' --dry-run")
     assert_match '"status": "dry_run"', output
 
-    # List models doesn't need API key
     output = shell_output("#{bin}/genmedia image --list-models")
     assert_match "gemini-3.1-flash-image-preview", output
   end
